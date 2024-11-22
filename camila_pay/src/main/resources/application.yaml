@@ -1,0 +1,40 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: camila_pay
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://${camila.db.host}:3306/camila?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ${camila.db.pw}
+mybatis-plus:
+  configuration:
+    default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+  global-config:
+    db-config:
+      update-strategy: not_null
+      id-type: auto
+logging:
+  level:
+    com.camila: debug
+  pattern:
+    dateformat: HH:mm:ss:SSS
+  file:
+    path: "logs/${spring.application.name}"
+knife4j:
+  enable: true
+  openapi:
+    title: 咕咕鸡支付接口文档
+    description: "咕咕鸡支付接口文档"
+    email: guguji@163.com
+    concat: 咕咕鸡
+    version: v1.0.0
+    group:
+      default:
+        group-name: default
+        api-rule: package
+        api-rule-resources:
+          - com.camila.pay.controller
