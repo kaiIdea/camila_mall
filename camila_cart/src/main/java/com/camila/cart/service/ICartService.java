@@ -1,9 +1,9 @@
 package com.camila.cart.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.camila.common.domain.dto.CartFormDTO;
+import com.camila.feign.domain.dto.CartFormDTO;
 import com.camila.common.domain.po.Cart;
-import com.camila.common.domain.vo.CartVO;
+import com.camila.feign.domain.vo.CartVO;
 
 import java.util.Collection;
 import java.util.List;

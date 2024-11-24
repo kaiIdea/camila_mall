@@ -2,9 +2,9 @@ package com.camila.cart.controller;
 
 
 import com.camila.cart.service.ICartService;
-import com.camila.common.domain.dto.CartFormDTO;
+import com.camila.feign.domain.dto.CartFormDTO;
 import com.camila.common.domain.po.Cart;
-import com.camila.common.domain.vo.CartVO;
+import com.camila.feign.domain.vo.CartVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

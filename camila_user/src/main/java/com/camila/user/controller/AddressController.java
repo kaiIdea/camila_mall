@@ -1,8 +1,8 @@
 package com.camila.user.controller;
 
 
-import com.camila.common.domain.dto.AddressDTO;
 import com.camila.common.domain.po.Address;
+import com.camila.feign.domain.dto.AddressDTO;
 import com.camila.common.exception.BadRequestException;
 import com.camila.common.utils.BeanUtils;
 import com.camila.common.utils.CollUtils;

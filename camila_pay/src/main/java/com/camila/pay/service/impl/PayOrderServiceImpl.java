@@ -3,14 +3,17 @@ package com.camila.pay.service.impl;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.camila.common.domain.dto.PayApplyDTO;
-import com.camila.common.domain.dto.PayOrderFormDTO;
+
 import com.camila.common.domain.po.Order;
 import com.camila.common.domain.po.PayOrder;
 import com.camila.common.enums.PayStatus;
 import com.camila.common.exception.BizIllegalException;
 import com.camila.common.utils.BeanUtils;
 import com.camila.common.utils.UserContext;
+import com.camila.feign.client.OrderClient;
+import com.camila.feign.domain.dto.OrderDTO;
+import com.camila.feign.domain.dto.PayApplyDTO;
+import com.camila.feign.domain.dto.PayOrderFormDTO;
 import com.camila.pay.mapper.PayOrderMapper;
 import com.camila.pay.service.IPayOrderService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +37,8 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
     //private final IUserService userService;
 
     //private final IOrderService orderService;
+
+    private final OrderClient orderClient;
 
     @Override
     public String applyPayOrder(PayApplyDTO applyDTO) {
@@ -64,13 +69,14 @@ public class PayOrderServiceImpl extends ServiceImpl<PayOrderMapper, PayOrder> i
             throw new BizIllegalException("交易已支付或关闭！");
         }
         // 5.修改订单状态
-        Order order = new Order();
+        OrderDTO order = new OrderDTO();
         order.setId(po.getBizOrderNo());
         order.setStatus(2);
         order.setPayTime(LocalDateTime.now());
 
         // TODO 微服务调用处理
         //orderService.updateById(order);
+        orderClient.updateById(order);
     }
 
     public boolean markPayOrderSuccess(Long id, LocalDateTime successTime) {

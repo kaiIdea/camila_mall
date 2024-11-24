@@ -1,7 +1,7 @@
 package com.camila.user.controller;
 
-import com.camila.common.domain.dto.LoginFormDTO;
-import com.camila.common.domain.vo.UserLoginVO;
+import com.camila.feign.domain.dto.LoginFormDTO;
+import com.camila.feign.domain.vo.UserLoginVO;
 import com.camila.user.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

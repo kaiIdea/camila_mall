@@ -1,7 +1,7 @@
 package com.camila.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.camila.common.domain.po.OrderLogistics;
+import com.camila.feign.domain.po.OrderLogistics;
 import com.camila.order.mapper.OrderLogisticsMapper;
 import com.camila.order.service.IOrderLogisticsService;
 import org.springframework.stereotype.Service;

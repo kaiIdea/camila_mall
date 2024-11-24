@@ -1,9 +1,9 @@
 package com.camila.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.camila.common.domain.dto.LoginFormDTO;
 import com.camila.common.domain.po.User;
-import com.camila.common.domain.vo.UserLoginVO;
+import com.camila.feign.domain.dto.LoginFormDTO;
+import com.camila.feign.domain.vo.UserLoginVO;
 
 /**
  * <p>

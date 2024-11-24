@@ -4,7 +4,7 @@ package com.camila.product.controller;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.camila.common.domain.PageDTO;
-import com.camila.common.domain.dto.ItemDTO;
+import com.camila.feign.domain.dto.ItemDTO;
 import com.camila.common.domain.po.Item;
 import com.camila.common.domain.query.ItemPageQuery;
 import com.camila.product.service.IItemService;

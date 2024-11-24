@@ -5,20 +5,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.camila.cart.mapper.CartMapper;
 import com.camila.cart.service.ICartService;
-import com.camila.common.domain.dto.CartFormDTO;
-import com.camila.common.domain.dto.ItemDTO;
+import com.camila.feign.client.ProductClient;
+import com.camila.feign.domain.dto.CartFormDTO;
+import com.camila.feign.domain.dto.ItemDTO;
 import com.camila.common.domain.po.Cart;
-import com.camila.common.domain.vo.CartVO;
+import com.camila.feign.domain.vo.CartVO;
 import com.camila.common.exception.BizIllegalException;
 import com.camila.common.utils.BeanUtils;
 import com.camila.common.utils.CollUtils;
 import com.camila.common.utils.UserContext;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
 import java.util.List;
@@ -35,10 +34,15 @@ import java.util.stream.Collectors;
  * @author camila
  * @since 2023-05-05
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements ICartService {
 
+
+    private final DiscoveryClient discoveryClient;
+
+    private final ProductClient productClient;
 
     @Override
     public void addItem2Cart(CartFormDTO cartFormDTO) {
@@ -65,6 +69,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
 
     @Override
     public List<CartVO> queryMyCarts() {
+        UserContext.setUser(1L);
         // 1.查询我的购物车列表
         List<Cart> carts = lambdaQuery().eq(Cart::getUserId, UserContext.getUser()).list();
         if (CollUtils.isEmpty(carts)) {
@@ -87,10 +92,20 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         // 2.查询商品
         //List<ItemDTO> items = itemService.queryItemByIds(itemIds);
         // TODO 微服务调用处理
-        RestTemplate template = new RestTemplate();
-        ResponseEntity<List<ItemDTO>> responseEntity = template.exchange("http://localhost:8085/items", HttpMethod.GET, null, new ParameterizedTypeReference<List<ItemDTO>>() {
-        }, CollUtils.join(itemIds, ","));
-        List<ItemDTO> items = responseEntity.getBody();
+//        List<ServiceInstance> productInstance = discoveryClient.getInstances("camila-product");
+//        ServiceInstance instance = productInstance.get(RandomUtil.randomInt(productInstance.size()));
+//        URI uri = instance.getUri();
+//        String host = instance.getHost();
+//        int port = instance.getPort();
+//        log.info("****获取product服务实例地址：host:{},port:{},uri:{}",host,port,uri);
+//
+//        RestTemplate template = new RestTemplate();
+//        ResponseEntity<List<ItemDTO>> responseEntity = template.exchange(uri+"/items?ids={ids}", HttpMethod.GET, null, new ParameterizedTypeReference<List<ItemDTO>>() {
+//        }, CollUtils.join(itemIds, ","));
+//        List<ItemDTO> items = responseEntity.getBody();
+
+
+        List<ItemDTO> items = productClient.queryItemByIds(itemIds);
         if (CollUtils.isEmpty(items)) {
             return;
         }

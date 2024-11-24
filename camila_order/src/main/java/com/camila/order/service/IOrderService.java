@@ -1,8 +1,8 @@
 package com.camila.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.camila.common.domain.dto.OrderFormDTO;
 import com.camila.common.domain.po.Order;
+import com.camila.feign.domain.dto.OrderFormDTO;
 
 /**
  * <p>

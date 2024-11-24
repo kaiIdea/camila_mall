@@ -1,4 +1,4 @@
-package com.camila.common.domain.vo;
+package com.camila.feign.domain.vo;
 
 import lombok.Data;
 

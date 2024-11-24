@@ -1,8 +1,8 @@
 package com.camila.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.camila.common.domain.dto.ItemDTO;
-import com.camila.common.domain.dto.OrderDetailDTO;
+import com.camila.feign.domain.dto.ItemDTO;
+import com.camila.feign.domain.dto.OrderDetailDTO;
 import com.camila.common.domain.po.Item;
 
 import java.util.Collection;

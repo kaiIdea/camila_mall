@@ -1,7 +1,7 @@
 package com.camila.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.camila.common.domain.po.OrderLogistics;
+import com.camila.feign.domain.po.OrderLogistics;
 
 /**
  * <p>

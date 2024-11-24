@@ -2,7 +2,7 @@ server:
   port: 8087
 spring:
   application:
-    name: camila_order
+    name: camila-order
   profiles:
     active: dev
   datasource:

@@ -1,9 +1,9 @@
 package com.camila.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.camila.common.domain.dto.LoginFormDTO;
 import com.camila.common.domain.po.User;
-import com.camila.common.domain.vo.UserLoginVO;
+import com.camila.feign.domain.dto.LoginFormDTO;
+import com.camila.feign.domain.vo.UserLoginVO;
 import com.camila.common.enums.UserStatus;
 import com.camila.common.exception.BadRequestException;
 import com.camila.common.exception.BizIllegalException;

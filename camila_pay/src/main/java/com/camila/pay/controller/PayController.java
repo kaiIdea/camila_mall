@@ -1,7 +1,7 @@
 package com.camila.pay.controller;
 
-import com.camila.common.domain.dto.PayApplyDTO;
-import com.camila.common.domain.dto.PayOrderFormDTO;
+import com.camila.feign.domain.dto.PayApplyDTO;
+import com.camila.feign.domain.dto.PayOrderFormDTO;
 import com.camila.common.enums.PayType;
 import com.camila.common.exception.BizIllegalException;
 import com.camila.pay.service.IPayOrderService;

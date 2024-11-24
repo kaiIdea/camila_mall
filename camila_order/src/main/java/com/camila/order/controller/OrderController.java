@@ -1,7 +1,9 @@
 package com.camila.order.controller;
 
-import com.camila.common.domain.dto.OrderFormDTO;
-import com.camila.common.domain.vo.OrderVO;
+import com.camila.common.domain.po.Order;
+import com.camila.feign.domain.dto.OrderDTO;
+import com.camila.feign.domain.dto.OrderFormDTO;
+import com.camila.feign.domain.vo.OrderVO;
 import com.camila.common.utils.BeanUtils;
 import com.camila.order.service.IOrderService;
 import io.swagger.annotations.Api;
@@ -35,5 +37,11 @@ public class OrderController {
     @PutMapping("/{orderId}")
     public void markOrderPaySuccess(@PathVariable("orderId") Long orderId) {
         orderService.markOrderPaySuccess(orderId);
+    }
+
+
+    @PutMapping("/updateById")
+    public void updateById(@RequestBody OrderDTO order) {
+        orderService.updateById(BeanUtils.copyBean(order, Order.class));
     }
 }

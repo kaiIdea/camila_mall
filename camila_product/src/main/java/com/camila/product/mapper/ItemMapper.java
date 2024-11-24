@@ -1,7 +1,7 @@
 package com.camila.product.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.camila.common.domain.dto.OrderDetailDTO;
+import com.camila.feign.domain.dto.OrderDetailDTO;
 import com.camila.common.domain.po.Item;
 import org.apache.ibatis.annotations.Update;
 

@@ -1,9 +1,9 @@
 package com.camila.pay.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.camila.common.domain.dto.PayApplyDTO;
-import com.camila.common.domain.dto.PayOrderFormDTO;
 import com.camila.common.domain.po.PayOrder;
+import com.camila.feign.domain.dto.PayApplyDTO;
+import com.camila.feign.domain.dto.PayOrderFormDTO;
 
 /**
  * <p>

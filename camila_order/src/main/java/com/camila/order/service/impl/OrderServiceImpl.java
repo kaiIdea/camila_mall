@@ -1,11 +1,13 @@
 package com.camila.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.camila.common.domain.dto.ItemDTO;
-import com.camila.common.domain.dto.OrderDetailDTO;
-import com.camila.common.domain.dto.OrderFormDTO;
 import com.camila.common.domain.po.Order;
 import com.camila.common.domain.po.OrderDetail;
+import com.camila.feign.client.CartClient;
+import com.camila.feign.client.ProductClient;
+import com.camila.feign.domain.dto.ItemDTO;
+import com.camila.feign.domain.dto.OrderDetailDTO;
+import com.camila.feign.domain.dto.OrderFormDTO;
 import com.camila.common.exception.BadRequestException;
 import com.camila.common.utils.CollUtils;
 import com.camila.common.utils.UserContext;
@@ -41,6 +43,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     //private final IItemService itemService;
     private final IOrderDetailService detailService;
+
+    private final ProductClient productClient;
+
+    private final CartClient cartClient;
+
     //private final ICartService cartService;
 
     @Override
@@ -66,7 +73,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         List<ItemDTO> items = responseEntity.getBody();
 
 
-
+        List<ItemDTO> itemDTOS = productClient.queryItemByIds(itemIds);
 
 
 
@@ -93,18 +100,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         // 3.清理购物车商品
         // TODO 微服务调用处理
         //cartService.removeByItemIds(itemIds);
-        ResponseEntity<String> response = template.exchange("http://localhost:8086/carts", HttpMethod.DELETE, null,
-                String.class, CollUtils.join(itemIds, ","));
-        System.out.println(response);
+//        ResponseEntity<String> response = template.exchange("http://localhost:8086/carts", HttpMethod.DELETE, null,
+//                String.class, CollUtils.join(itemIds, ","));
+//        System.out.println(response);
 
-
+        cartClient.deleteCartItemByIds(itemIds);
         // 4.扣减库存
         try {
             // TODO 微服务调用处理
-            ResponseEntity<String> response1 = template.exchange("http://localhost:8085/items", HttpMethod.PUT, null,
-                    String.class, details);
-            System.out.println(response1);
-            //itemService.deductStock(detailDTOS);
+//            ResponseEntity<String> response1 = template.exchange("http://localhost:8085/items", HttpMethod.PUT, null,
+//                    String.class, details);
+//            System.out.println(response1);
+//            itemService.deductStock(detailDTOS);
+            productClient.deductStock(detailDTOS);
         } catch (Exception e) {
             throw new RuntimeException("库存不足！");
         }

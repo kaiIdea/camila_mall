@@ -1,8 +1,8 @@
 package com.camila.product.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.camila.common.domain.dto.ItemDTO;
-import com.camila.common.domain.dto.OrderDetailDTO;
+import com.camila.feign.domain.dto.ItemDTO;
+import com.camila.feign.domain.dto.OrderDetailDTO;
 import com.camila.common.domain.po.Item;
 import com.camila.common.exception.BizIllegalException;
 import com.camila.common.utils.BeanUtils;
