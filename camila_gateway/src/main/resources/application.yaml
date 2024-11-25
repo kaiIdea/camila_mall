@@ -1,0 +1,45 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: camila-gateway
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: product
+          uri: lb://camila-product
+          predicates:
+            - Path=/items/**,/search**
+        - id: cart
+          uri: lb://camila-cart
+          predicates:
+            - Path=/carts/**
+        - id: user
+          uri: lb://camila-user
+          predicates:
+            - Path=/users/**,/addresses/**
+        - id: order
+          uri: lb://camila-order
+          predicates:
+            - Path=/orders/**
+        - id: pay
+          uri: lb://camila-pay
+          predicates:
+            - Path=/pay-orders/**
+
+
+camila:
+  jwt:
+    location: classpath:hmall.jks
+    alias: camila
+    password: hmall123
+    tokenTTL: 30m
+  auth:
+    excludePaths:
+      - /search/**
+      - /users/login
+      - /items/**
+      - /hi
+

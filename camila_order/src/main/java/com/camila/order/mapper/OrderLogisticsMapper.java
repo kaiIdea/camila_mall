@@ -1,7 +1,7 @@
 package com.camila.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.camila.feign.domain.po.OrderLogistics;
+import com.camila.common.domain.po.OrderLogistics;
 
 /**
  * <p>

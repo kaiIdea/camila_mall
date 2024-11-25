@@ -16,6 +16,7 @@
         <module>camila_order</module>
         <module>camila_pay</module>
         <module>camila_api_feign</module>
+        <module>camila_gateway</module>
     </modules>
 
     <parent>
