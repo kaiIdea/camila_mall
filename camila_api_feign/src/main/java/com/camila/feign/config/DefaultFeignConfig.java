@@ -10,4 +10,14 @@ public class DefaultFeignConfig {
     public Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL;
     }
+
+
+//    public RequestInterceptor userInfoRequestInterceptor(){
+//        return new RequestInterceptor() {
+//            @Override
+//            public void apply(RequestTemplate requestTemplate) {
+//
+//            }
+//        }
+//    }
 }
