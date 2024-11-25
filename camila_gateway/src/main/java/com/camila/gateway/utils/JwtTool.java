@@ -1,4 +1,4 @@
-package com.camila.gateway.filter.utils;
+package com.camila.gateway.utils;
 
 import cn.hutool.core.exceptions.ValidateException;
 import cn.hutool.jwt.JWT;

@@ -3,7 +3,7 @@ package com.camila.gateway.filter;
 import cn.hutool.core.text.AntPathMatcher;
 import com.camila.common.utils.CollUtils;
 import com.camila.gateway.config.AuthProperties;
-import com.camila.gateway.filter.utils.JwtTool;
+import com.camila.gateway.utils.JwtTool;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -52,7 +52,12 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             return response.setComplete();
         }
         log.info("**用户ID:{}",userId);
-        return chain.filter(exchange);
+        //将用户Id,加入网关请求后续的微服务的请求头中
+        //微服务收到请求后，从头中取出，即可使用
+        String finalUserId = userId.toString();
+        ServerWebExchange build = exchange.mutate().request(data -> data.header("userId", finalUserId))
+                .build();
+        return chain.filter(build);
     }
 
     private boolean isExclude(String path) {
