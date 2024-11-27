@@ -20,6 +20,7 @@ public class SecurityConfig {
 
     @Bean
     public KeyPair keyPair(JwtProperties properties){
+        System.out.println("*****************"+properties);
         // 获取秘钥工厂
         KeyStoreKeyFactory keyStoreKeyFactory =
                 new KeyStoreKeyFactory(

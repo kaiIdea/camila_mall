@@ -3,24 +3,19 @@ package com.camila.order.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.camila.common.domain.po.Order;
 import com.camila.common.domain.po.OrderDetail;
+import com.camila.common.exception.BadRequestException;
+import com.camila.common.utils.UserContext;
 import com.camila.feign.client.CartClient;
 import com.camila.feign.client.ProductClient;
 import com.camila.feign.domain.dto.ItemDTO;
 import com.camila.feign.domain.dto.OrderDetailDTO;
 import com.camila.feign.domain.dto.OrderFormDTO;
-import com.camila.common.exception.BadRequestException;
-import com.camila.common.utils.CollUtils;
-import com.camila.common.utils.UserContext;
 import com.camila.order.mapper.OrderMapper;
 import com.camila.order.service.IOrderDetailService;
 import com.camila.order.service.IOrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -67,13 +62,13 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         // 1.3.查询商品
         // TODO 微服务调用处理
         //List<ItemDTO> items = itemService.queryItemByIds(itemIds);
-        RestTemplate template = new RestTemplate();
-        ResponseEntity<List<ItemDTO>> responseEntity = template.exchange("http://localhost:8085/items", HttpMethod.GET, null, new ParameterizedTypeReference<List<ItemDTO>>() {
-        }, CollUtils.join(itemIds, ","));
-        List<ItemDTO> items = responseEntity.getBody();
+//        RestTemplate template = new RestTemplate();
+//        ResponseEntity<List<ItemDTO>> responseEntity = template.exchange("http://localhost:8085/items", HttpMethod.GET, null, new ParameterizedTypeReference<List<ItemDTO>>() {
+//        }, CollUtils.join(itemIds, ","));
+//        List<ItemDTO> items = responseEntity.getBody();
 
 
-        List<ItemDTO> itemDTOS = productClient.queryItemByIds(itemIds);
+        List<ItemDTO> items = productClient.queryItemByIds(itemIds);
 
 
 

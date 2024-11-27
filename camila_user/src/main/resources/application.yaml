@@ -45,7 +45,7 @@ knife4j:
 camila:
   jwt:
     location: classpath:hmall.jks
-    alias: camila
+    alias: hmall
     password: hmall123
     tokenTTL: 30m
   auth:

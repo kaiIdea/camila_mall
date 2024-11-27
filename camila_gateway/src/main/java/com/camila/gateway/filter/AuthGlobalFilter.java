@@ -47,6 +47,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         try {
             userId = jwtTool.parseToken(token);
         } catch (Exception e) {
+            e.printStackTrace();
             ServerHttpResponse response = exchange.getResponse();
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
